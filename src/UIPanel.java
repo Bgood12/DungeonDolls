@@ -16,14 +16,17 @@ public class UIPanel extends Pane {
         init();
     }
 
+    /**
+     * The method responsible for initializing the character panel in the UI
+     */
     private void init() {
-        String path = System.getProperty("user.dir");
+        String path = System.getProperty("user.dir"); //Gets the file path
         File[] chars = new File(path + "/assets").listFiles();
-        VBox charPanel = new VBox();
-        for (int i  = 0; i<chars.length; i++) {
+        VBox charPanel = new VBox(); //The structure that character names will exist in
+        for (int i  = 0; i<chars.length; i++) { //Iterates through the list of characters
             int nameStart = chars[i].toString().lastIndexOf('\\');
-            String name = chars[i].toString().substring(nameStart + 1);
-            Button but = new Button(name);
+            String name = chars[i].toString().substring(nameStart + 1); //get a characters name
+            Button but = new Button(name); //Create a button for each character
             //TODO set on action
             charPanel.getChildren().add(but);
             //TODO make doll
@@ -33,6 +36,10 @@ public class UIPanel extends Pane {
 
     }
 
+    /**
+     * Getter method for the UIPanel
+     * @return The UIPanel
+     */
     public HBox getPanel() {
         return panel;
     }

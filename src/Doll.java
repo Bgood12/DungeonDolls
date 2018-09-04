@@ -4,5 +4,10 @@ public class Doll {
 
     public Doll(String name) {
         this.name = name;
+        init();
+    }
+
+    private void init() {
+
     }
 }
