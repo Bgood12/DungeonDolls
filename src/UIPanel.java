@@ -1,3 +1,5 @@
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.scene.control.Button;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
@@ -8,11 +10,13 @@ import java.io.File;
 
 public class UIPanel extends Pane {
 
-
+    UIPanel uiPanel;
     HBox panel;
+    Doll currentDoll;
 
     public UIPanel() {
         this.panel = new HBox();
+        this.uiPanel=this;
         init();
     }
 
@@ -28,12 +32,29 @@ public class UIPanel extends Pane {
             String name = chars[i].toString().substring(nameStart + 1); //get a characters name
             Button but = new Button(name); //Create a button for each character
             //TODO set on action
+            but.setOnAction(new EventHandler<ActionEvent>() {
+                @Override
+                public void handle(ActionEvent event) {
+                    Doll user = new Doll(name, uiPanel);
+                    dollCheck();
+                    currentDoll=user;
+                    user.init();
+                }
+            });
+            //TODO put doll in showpanel
             charPanel.getChildren().add(but);
-            //TODO make doll
         }
-        charPanel.toString();
         panel.getChildren().add(charPanel);
 
+    }
+
+    /**
+     * If the user is currently controling a doll then remove its menus before accessing another.
+     */
+    private void dollCheck() {
+        if (currentDoll != null) {
+            currentDoll.exit();
+        }
     }
 
     /**
