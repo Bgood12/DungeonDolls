@@ -1,7 +1,8 @@
+package Dolls;
+
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Button;
-import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
@@ -31,17 +32,15 @@ public class UIPanel extends Pane {
             int nameStart = chars[i].toString().lastIndexOf('\\');
             String name = chars[i].toString().substring(nameStart + 1); //get a characters name
             Button but = new Button(name); //Create a button for each character
-            //TODO set on action
             but.setOnAction(new EventHandler<ActionEvent>() {
                 @Override
                 public void handle(ActionEvent event) {
                     Doll user = new Doll(name, uiPanel);
                     dollCheck();
                     currentDoll=user;
-                    user.init();
+                    user.setActive();
                 }
             });
-            //TODO put doll in showpanel
             charPanel.getChildren().add(but);
         }
         panel.getChildren().add(charPanel);
@@ -58,8 +57,8 @@ public class UIPanel extends Pane {
     }
 
     /**
-     * Getter method for the UIPanel
-     * @return The UIPanel
+     * Getter method for the Dolls.UIPanel
+     * @return The Dolls.UIPanel
      */
     public HBox getPanel() {
         return panel;

@@ -1,3 +1,5 @@
+package Dolls;
+
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 

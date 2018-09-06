@@ -1,3 +1,5 @@
+package Dolls;
+
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Button;
@@ -10,6 +12,7 @@ public class Doll {
 
     String name;
     UIPanel select;
+    VBox emotePanel;
     int jumpDist = 10;
     int moveSpeed = 240;
 
@@ -17,30 +20,36 @@ public class Doll {
     public Doll(String name, UIPanel select) {
         this.name = name;
         this.select = select;
+        this.emotePanel = new VBox();
+        init();
     }
 
-    public void init() {
+    private void init() {
         String path = System.getProperty("user.dir");
         File[] emotes = new File(path + "/assets/" + name).listFiles();
-        VBox emotePanel = new VBox();
+
         for (int i  = 0; i<emotes.length; i++) { //Iterates through the list of characters
             int emoteStart = emotes[i].toString().lastIndexOf('\\');
             String emote = emotes[i].toString().substring(emoteStart + 1); //get a characters name
             Button but = new Button(emote); //Create a button for each character
-            //TODO set on action
             but.setOnAction(new EventHandler<ActionEvent>() {
                 @Override
                 public void handle(ActionEvent event) {
-
+                    //TODO set on action
+                    //TODO put image in showPanel
                 }
             });
+
             emotePanel.getChildren().add(but);
         }
-        select.getPanel().getChildren().add(emotePanel);
+    }
 
+    public void setActive() {
+        select.getPanel().getChildren().add(emotePanel);
     }
 
     public void exit() {
-        //TODO remove doll menu from UIPanel
+        select.getPanel().getChildren().remove(emotePanel);
+        //TODO remove image from showpanel
     }
 }
